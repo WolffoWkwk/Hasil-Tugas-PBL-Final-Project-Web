@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LelangKita - Lelang Online Terpercaya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="resources/CSS/style.css" >
+    <script src="resources/JS/main.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo" onclick="setCurrentView('home')">
+                    <div class="logo-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <span class="logo-text">LelangKita</span>
+                </div>
+
+                <!-- Search Bar - Desktop -->
+                <div class="search-bar">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Cari produk, kategori..." id="search-input">
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="nav-buttons">
+                    <button class="btn btn-ghost btn-sm hidden md-flex" onclick="setCurrentView('listing')">
+                        <i class="fas fa-search mr-2"></i>
+                        Jelajahi
+                    </button>
+
+                    <button class="btn btn-ghost btn-sm hidden md-flex" onclick="setCurrentView('create-auction')">
+                        <i class="fas fa-plus mr-2"></i>
+                        Jual
+                    </button>
+
+                    <div class="notification-container">
+                        <button class="btn btn-ghost btn-sm" onclick="toggleNotifications()">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge hidden" id="notification-badge">2</span>
+                        </button>
+                    </div>
+
+                    <button class="btn btn-ghost btn-sm" onclick="setCurrentView('dashboard')">
+                        <i class="fas fa-user"></i>
+                        <span class="hidden md-inline ml-2">Akun</span>
+                    </button>
+
+                    <button class="btn btn-ghost btn-sm md-hidden" onclick="openMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search -->
+            <div class="mobile-search">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Cari produk, kategori..." id="mobile-search-input">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home View -->
+        <div id="home-view" class="view">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Lelang Online <span style="color: var(--primary);">Terpercaya</span></h1>
+                        <p>Temukan barang unik, bid dengan aman, dan menangkan lelang impian Anda di platform lelang online terpercaya Indonesia.</p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary btn-lg" onclick="setCurrentView('listing')">Mulai Lelang</button>
+                            <button class="btn btn-outline btn-lg" onclick="setCurrentView('create-auction')">Jual Barang</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats -->
+            <section class="container">
+                <div class="grid grid-4">
+                    <div class="card text-center">
+                        <div class="card-content">
+                            <div class="text-2xl font-bold" style="color: var(--primary);">10K+</div>
+                            <p class="text-sm text-muted">Produk Terjual</p>
+                        </div>
+                    </div>
+                    <div class="card text-center">
+                        <div class="card-content">
+                            <div class="text-2xl font-bold" style="color: var(--primary);">50K+</div>
+                            <p class="text-sm text-muted">Pengguna Aktif</p>
+                        </div>
+                    </div>
+                    <div class="card text-center">
+                        <div class="card-content">
+                            <div class="text-2xl font-bold" style="color: var(--primary);">95%</div>
+                            <p class="text-sm text-muted">Kepuasan</p>
+                        </div>
+                    </div>
+                    <div class="card text-center">
+                        <div class="card-content">
+                            <div class="text-2xl font-bold" style="color: var(--primary);">24/7</div>
+                            <p class="text-sm text-muted">Support</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Auctions -->
+            <section class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Lelang Populer</h2>
+                    <button class="btn btn-outline" onclick="setCurrentView('listing')">Lihat Semua</button>
+                </div>
+
+                <div class="grid grid-3" id="featured-auctions">
+                    <!-- Auction cards will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section class="container">
+                <h2 class="section-title">Kategori Populer</h2>
+                <div class="grid grid-5">
+                    <div class="card cursor-pointer" onclick="setCurrentView('listing')">
+                        <div class="card-content text-center">
+                            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-box text-orange-600"></i>
+                            </div>
+                            <p class="font-medium">Elektronik</p>
+                        </div>
+                    </div>
+                    <div class="card cursor-pointer" onclick="setCurrentView('listing')">
+                        <div class="card-content text-center">
+                            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-tshirt text-orange-600"></i>
+                            </div>
+                            <p class="font-medium">Fashion</p>
+                        </div>
+                    </div>
+                    <div class="card cursor-pointer" onclick="setCurrentView('listing')">
+                        <div class="card-content text-center">
+                            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-history text-orange-600"></i>
+                            </div>
+                            <p class="font-medium">Antik & Koleksi</p>
+                        </div>
+                    </div>
+                    <div class="card cursor-pointer" onclick="setCurrentView('listing')">
+                        <div class="card-content text-center">
+                            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-gem text-orange-600"></i>
+                            </div>
+                            <p class="font-medium">Perhiasan</p>
+                        </div>
+                    </div>
+                    <div class="card cursor-pointer" onclick="setCurrentView('listing')">
+                        <div class="card-content text-center">
+                            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-car text-orange-600"></i>
+                            </div>
+                            <p class="font-medium">Otomotif</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Listing View -->
+        <div id="listing-view" class="view hidden">
+            <div class="container py-6">
+                <div class="breadcrumbs mb-6">
+                    <span class="breadcrumb-item">Jelajahi Lelang</span>
+                </div>
+
+                <div class="listing-layout">
+                    <!-- Filters Sidebar -->
+                    <div class="filters-sidebar">
+                        <div class="card">
+                            <div class="card-content">
+                                <h3 class="card-title mb-4">Filter</h3>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Kategori</label>
+                                    <select class="form-select" id="category-filter">
+                                        <option>Semua Kategori</option>
+                                        <option>Elektronik</option>
+                                        <option>Fashion</option>
+                                        <option>Antik & Koleksi</option>
+                                        <option>Perhiasan & Aksesoris</option>
+                                        <option>Otomotif</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Kondisi</label>
+                                    <div>
+                                        <label><input type="checkbox" value="baru"> Baru</label>
+                                        <label><input type="checkbox" value="seperti-baru"> Seperti Baru</label>
+                                        <label><input type="checkbox" value="baik"> Baik</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Rentang Harga</label>
+                                    <div class="flex items-center gap-2">
+                                        <input type="number" class="form-input" placeholder="Min" id="price-min">
+                                        <span>-</span>
+                                        <input type="number" class="form-input" placeholder="Max" id="price-max">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Lokasi</label>
+                                    <input type="text" class="form-input" placeholder="Kota" id="location-filter">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Urutkan</label>
+                                    <select class="form-select" id="sort-by">
+                                        <option value="ending-soon">Berakhir Segera</option>
+                                        <option value="newest">Terbaru</option>
+                                        <option value="price-low">Harga Terendah</option>
+                                        <option value="price-high">Harga Tertinggi</option>
+                                    </select>
+                                </div>
+                                
+                                <button class="btn btn-outline w-full mt-4" onclick="clearFilters()">Hapus Filter</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="listing-content">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-4">
+                                <h1 class="text-2xl font-bold">Jelajahi Lelang</h1>
+                                <span class="badge badge-secondary" id="auction-count">6 produk</span>
+                            </div>
+
+                            <div class="view-toggle">
+                                <button class="btn btn-sm" id="grid-view-btn" onclick="setViewType('grid')">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button class="btn btn-outline btn-sm" id="list-view-btn" onclick="setViewType('list')">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Auction Grid -->
+                        <div class="grid grid-3" id="auction-grid">
+                            <!-- Auction cards will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Detail View -->
+        <div id="product-detail-view" class="view hidden">
+            <div class="container py-6">
+                <div class="breadcrumbs mb-6">
+                    <span class="breadcrumb-item cursor-pointer" onclick="setCurrentView('listing')">Jelajahi Lelang</span>
+                    <i class="fas fa-chevron-right breadcrumb-separator"></i>
+                    <span class="breadcrumb-item" id="detail-category">Elektronik</span>
+                    <i class="fas fa-chevron-right breadcrumb-separator"></i>
+                    <span class="breadcrumb-item" id="detail-title">iPhone 14 Pro Max</span>
+                </div>
+
+                <div class="grid grid-2 gap-8">
+                    <!-- Images -->
+                    <div>
+                        <img id="detail-main-image" src="" alt="" class="w-full h-96 object-cover rounded-lg mb-4">
+                        <div class="flex gap-2">
+                            <div class="w-20 h-20 bg-gray-100 rounded-lg border-2 border-transparent hover:border-orange-500 cursor-pointer">
+                                <img src="" alt="" class="w-full h-full object-cover rounded-md">
+                            </div>
+                            <div class="w-20 h-20 bg-gray-100 rounded-lg border-2 border-transparent hover:border-orange-500 cursor-pointer">
+                                <img src="" alt="" class="w-full h-full object-cover rounded-md">
+                            </div>
+                            <div class="w-20 h-20 bg-gray-100 rounded-lg border-2 border-transparent hover:border-orange-500 cursor-pointer">
+                                <img src="" alt="" class="w-full h-full object-cover rounded-md">
+                            </div>
+                            <div class="w-20 h-20 bg-gray-100 rounded-lg border-2 border-transparent hover:border-orange-500 cursor-pointer">
+                                <img src="" alt="" class="w-full h-full object-cover rounded-md">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Details -->
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="badge badge-secondary" id="detail-category-badge">Elektronik</span>
+                                <span class="badge badge-outline" id="detail-condition">Seperti Baru</span>
+                                <span class="badge badge-success" id="detail-status">Aktif</span>
+                            </div>
+                            <h1 class="text-2xl font-bold mb-4" id="detail-title-text">iPhone 14 Pro Max</h1>
+                            <p class="text-muted" id="detail-description">
+                                iPhone 14 Pro Max dalam kondisi sangat baik, lengkap dengan box dan aksesoris.
+                            </p>
+                        </div>
+
+                        <!-- Current Bid -->
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-sm text-muted">Bid Tertinggi</span>
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-eye text-muted"></i>
+                                        <span class="text-sm text-muted" id="detail-watchers">85 memantau</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-3xl font-bold" style="color: var(--primary);" id="detail-current-bid">Rp 12.500.000</div>
+
+                                <div class="text-sm text-muted mb-4">
+                                    <span id="detail-bid-count">24</span> bid • Bid minimum: <span id="detail-minimum-bid">Rp 13.000.000</span>
+                                </div>
+
+                                <div class="countdown lg mb-6" id="detail-countdown">
+                                    <div class="countdown-item">
+                                        <div class="countdown-value">01</div>
+                                        <div class="countdown-label">Hari</div>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <div class="countdown-value">12</div>
+                                        <div class="countdown-label">Jam</div>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <div class="countdown-value">45</div>
+                                        <div class="countdown-label">Menit</div>
+                                    </div>
+                                    <div class="countdown-item">
+                                        <div class="countdown-value">30</div>
+                                        <div class="countdown-label">Detik</div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <button class="btn btn-primary flex-1" onclick="openBidModal()">Pasang Bid</button>
+                                    <button class="btn btn-outline flex-1" id="buy-now-btn">
+                                        Beli Sekarang - <span id="buy-now-price">Rp 18.000.000</span>
+                                    </button>
+                                    <button class="btn btn-ghost btn-sm" onclick="toggleLike()">
+                                        <i class="fas fa-heart" id="like-icon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seller Info -->
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-user text-orange-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium" id="detail-seller">TechStore Jakarta</div>
+                                        <div class="text-sm text-muted flex items-center gap-1">
+                                            <i class="fas fa-star" style="color: #fbbf24;"></i>
+                                            4.8 (245 ulasan)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="separator my-4"></div>
+                                <div class="text-sm text-muted">
+                                    <p>📍 <span id="detail-location">Jakarta Selatan</span></p>
+                                    <p>🚚 Gratis ongkir untuk pembelian di atas Rp 500.000</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bid History -->
+                <div class="card mt-8">
+                    <div class="card-header">
+                        <h3 class="card-title">Riwayat Bid</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="space-y-3" id="bid-history">
+                            <!-- Bid history items will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard View -->
+        <div id="dashboard-view" class="view hidden">
+            <div class="container py-6">
+                <div class="breadcrumbs mb-6">
+                    <span class="breadcrumb-item">Dashboard Saya</span>
+                </div>
+
+                <div class="dashboard-layout">
+                    <!-- Sidebar -->
+                    <div>
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="flex items-center gap-3 mb-6">
+                                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-user text-orange-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium">John Doe</div>
+                                        <div class="text-sm text-muted">Member sejak 2023</div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <button class="btn btn-ghost w-full justify-start" onclick="setDashboardTab('bids')">
+                                        <i class="fas fa-gavel mr-2"></i>
+                                        Bid Saya
+                                    </button>
+                                    <button class="btn btn-ghost w-full justify-start" onclick="setDashboardTab('selling')">
+                                        <i class="fas fa-box mr-2"></i>
+                                        Penjualan
+                                    </button>
+                                    <button class="btn btn-ghost w-full justify-start" onclick="setDashboardTab('wishlist')">
+                                        <i class="fas fa-heart mr-2"></i>
+                                        Wishlist
+                                    </button>
+                                    <button class="btn btn-ghost w-full justify-start">
+                                        <i class="fas fa-cog mr-2"></i>
+                                        Pengaturan
+                                    </button>
+                                    <button class="btn btn-ghost w-full justify-start" style="color: var(--error);">
+                                        <i class="fas fa-sign-out-alt mr-2"></i>
+                                        Keluar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div>
+                        <div class="tabs">
+                            <div class="tabs-list">
+                                <button class="tab-trigger active" onclick="setDashboardTab('bids')">Bid Saya</button>
+                                <button class="tab-trigger" onclick="setDashboardTab('selling')">Penjualan</button>
+                                <button class="tab-trigger" onclick="setDashboardTab('won')">Dimenangkan</button>
+                            </div>
+
+                            <div class="tab-content active" id="bids-tab">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-medium">Bid Aktif</h3>
+                                    <span class="badge badge-secondary">3 aktif</span>
+                                </div>
+
+                                <div class="space-y-4" id="active-bids">
+                                    <!-- Active bids will be populated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <div class="tab-content" id="selling-tab">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-medium">Barang Dijual</h3>
+                                    <button class="btn btn-primary" onclick="setCurrentView('create-auction')">
+                                        <i class="fas fa-plus mr-2"></i>
+                                        Buat Lelang Baru
+                                    </button>
+                                </div>
+
+                                <div class="grid grid-3 gap-4">
+                                    <div class="card text-center p-6">
+                                        <i class="fas fa-chart-line text-green-600 text-2xl mx-auto mb-2"></i>
+                                        <div class="text-2xl font-bold">5</div>
+                                        <div class="text-sm text-muted">Aktif</div>
+                                    </div>
+                                    <div class="card text-center p-6">
+                                        <i class="fas fa-clock text-orange-600 text-2xl mx-auto mb-2"></i>
+                                        <div class="text-2xl font-bold">2</div>
+                                        <div class="text-sm text-muted">Menunggu</div>
+                                    </div>
+                                    <div class="card text-center p-6">
+                                        <i class="fas fa-box text-blue-600 text-2xl mx-auto mb-2"></i>
+                                        <div class="text-2xl font-bold">12</div>
+                                        <div class="text-sm text-muted">Terjual</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-content" id="won-tab">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-medium">Lelang Dimenangkan</h3>
+                                    <span class="badge badge-secondary">1 menunggu pembayaran</span>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="flex gap-4">
+                                            <img src="https://images.unsplash.com/photo-1755452541301-a95736f282c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xsZWN0aWJsZSUyMGFudGlxdWUlMjBhcnR8ZW58MXx8fHwxNzU4MTE3NzMwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Antique Chinese Porcelain Vase" class="w-20 h-20 rounded-lg object-cover flex-shrink-0">
+                                            <div class="flex-1">
+                                                <h4 class="font-medium mb-1">Antique Chinese Porcelain Vase - Ming Dynasty Style</h4>
+                                                <div class="text-sm text-muted mb-2">Bid pemenang: Rp 8.500.000</div>
+                                                <span class="badge badge-success">Menang</span>
+                                            </div>
+                                            <div class="flex flex-col gap-2">
+                                                <button class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-credit-card mr-2"></i>
+                                                    Bayar Sekarang
+                                                </button>
+                                                <button class="btn btn-outline btn-sm">Detail</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Auction View -->
+        <div id="create-auction-view" class="view hidden">
+            <div class="container py-6">
+                <div class="card max-w-2xl mx-auto">
+                    <div class="card-header">
+                        <h2 class="card-title">Buat Lelang Baru</h2>
+                    </div>
+                    <div class="card-content">
+                        <form id="auction-form">
+                            <div class="form-group">
+                                <label class="form-label">Judul Lelang</label>
+                                <input type="text" class="form-input" placeholder="Contoh: iPhone 14 Pro Max 256GB" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Deskripsi</label>
+                                <textarea class="form-textarea" placeholder="Jelaskan detail produk, kondisi, dan kelengkapannya" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Kategori</label>
+                                <select class="form-select" required>
+                                    <option value="">Pilih Kategori</option>
+                                    <option value="elektronik">Elektronik</option>
+                                    <option value="fashion">Fashion</option>
+                                    <option value="antik">Antik & Koleksi</option>
+                                    <option value="perhiasan">Perhiasan & Aksesoris</option>
+                                    <option value="otomotif">Otomotif</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Kondisi</label>
+                                <select class="form-select" required>
+                                    <option value="">Pilih Kondisi</option>
+                                    <option value="baru">Baru</option>
+                                    <option value="seperti-baru">Seperti Baru</option>
+                                    <option value="baik">Baik</option>
+                                    <option value="cukup">Cukup</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Harga Awal</label>
+                                <input type="number" class="form-input" placeholder="0" min="0" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Harga Beli Langsung (Opsional)</label>
+                                <input type="number" class="form-input" placeholder="0" min="0">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Lama Lelang</label>
+                                <select class="form-select" required>
+                                    <option value="1">1 Hari</option>
+                                    <option value="3">3 Hari</option>
+                                    <option value="7">7 Hari</option>
+                                    <option value="14">14 Hari</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Gambar Produk</label>
+                                <input type="file" class="form-input" accept="image/*" multiple required>
+                            </div>
+
+                            <div class="flex gap-3 mt-6">
+                                <button type="submit" class="btn btn-primary flex-1">Buat Lelang</button>
+                                <button type="button" class="btn btn-outline flex-1" onclick="setCurrentView('dashboard')">Batal</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin View -->
+        <div id="admin-view" class="view hidden">
+            <div class="container py-6">
+                <div class="breadcrumbs mb-6">
+                    <span class="breadcrumb-item">Admin Panel</span>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h1 class="text-2xl font-bold">Admin Dashboard</h1>
+                        <span class="badge badge-secondary">Super Admin</span>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-4">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-muted">Total Lelang</p>
+                                        <p class="text-2xl font-bold">1,247</p>
+                                    </div>
+                                    <i class="fas fa-chart-bar text-blue-600 text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-muted">Pengguna Aktif</p>
+                                        <p class="text-2xl font-bold">52,394</p>
+                                    </div>
+                                    <i class="fas fa-users text-green-600 text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-muted">Total Transaksi</p>
+                                        <p class="text-2xl font-bold">Rp 2.4M</p>
+                                    </div>
+                                    <i class="fas fa-credit-card text-orange-600 text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-muted">Pending Review</p>
+                                        <p class="text-2xl font-bold">23</p>
+                                    </div>
+                                    <i class="fas fa-clock text-red-600 text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activities -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Aktivitas Terbaru</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="space-y-4" id="recent-activities">
+                                <!-- Activities will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bid Modal -->
+    <div class="modal-overlay hidden" id="bid-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Pasang Bid</h3>
+            </div>
+            <div class="modal-content">
+                <div class="mb-4">
+                    <p class="text-muted mb-2">Item: <span id="modal-item-title">iPhone 14 Pro Max</span></p>
+                    <p class="text-muted">Bid saat ini: <span id="modal-current-bid" class="font-bold">Rp 12.500.000</span></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Jumlah Bid</label>
+                    <input type="number" class="form-input" id="bid-amount" min="13000000" step="500000" value="13000000">
+                    <p class="text-sm text-muted mt-1">Bid minimum: <span id="modal-minimum-bid">Rp 13.000.000</span></p>
+                </div>
+
+                <div class="flex gap-3 mt-6">
+                    <button class="btn btn-primary flex-1" onclick="placeBid()">Pasang Bid</button>
+                    <button class="btn btn-outline flex-1" onclick="closeBidModal()">Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container">
+        <!-- Toasts will be added here by JavaScript -->
+    </div>
+
+    <!-- Quick Access Button -->
+    <button class="btn btn-primary quick-access" onclick="setCurrentView('admin')" title="Admin Panel (Demo)">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay hidden" id="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <h3>Menu</h3>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-menu-content">
+            <button class="btn btn-ghost justify-start" onclick="setCurrentView('home'); closeMobileMenu();">
+                <i class="fas fa-home mr-2"></i>
+                Beranda
+            </button>
+            <button class="btn btn-ghost justify-start" onclick="setCurrentView('listing'); closeMobileMenu();">
+                <i class="fas fa-search mr-2"></i>
+                Jelajahi
+            </button>
+            <button class="btn btn-ghost justify-start" onclick="setCurrentView('create-auction'); closeMobileMenu();">
+                <i class="fas fa-plus mr-2"></i>
+                Jual
+            </button>
+            <button class="btn btn-ghost justify-start" onclick="setCurrentView('dashboard'); closeMobileMenu();">
+                <i class="fas fa-user mr-2"></i>
+                Akun Saya
+            </button>
+            <div class="separator"></div>
+            <button class="btn btn-ghost justify-start">
+                <i class="fas fa-cog mr-2"></i>
+                Pengaturan
+            </button>
+            <button class="btn btn-ghost justify-start" style="color: var(--error);">
+                <i class="fas fa-sign-out-alt mr-2"></i>
+                Keluar
+            </button>
+        </div>
+    </div>
+</body>
+</html>
